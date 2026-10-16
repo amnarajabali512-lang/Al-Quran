@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>القرآن اکیڈمی برائے طالبات | Al-Quran Academy for Girls</title>
+  <meta name="description" content="Online Quran Academy for Girls and Women. Tajweed, Qirat, Tafseer, and Women Fiqh courses with certified female scholars.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-urdu">
+
+  <!-- Top Notification / Contact Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-contact">
+        <a href="https://wa.me/923001234567" target="_blank"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="top_whatsapp">واٹس ایپ: 923001234567+</span></a>
+        <a href="mailto:info@alquranacademy.com"><i class="fa-regular fa-envelope"></i> info@alquranacademy.com</a>
+      </div>
+      <div>
+        <span><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="top_support_note">تمام کلاسز خواتین معلمات (Female Tutors) کے ذریعے کروائی جاتی ہیں</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="main-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon">
+            <img src="images/logo.svg" alt="القرآن اکیڈمی لوگو" width="48" height="48">
+          </div>
+          <div class="brand-text">
+            <h1 data-i18n="brand_title">القرآن اکیڈمی</h1>
+          </div>
+        </a>
+
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html" class="active" data-i18n="nav_home">ہوم</a></li>
+            <li><a href="courses.html" data-i18n="nav_courses">کورسز</a></li>
+            <li><a href="about.html" data-i18n="nav_about">ہمارے بارے میں</a></li>
+            <li><a href="admission.html" data-i18n="nav_admission">داخلہ</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">رابطہ</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-cta">
+          <!-- Language Switcher: Click globe icon to cycle languages -->
+          <div class="lang-switcher-wrap">
+            <button class="lang-btn" id="langToggleBtn" title="Switch Language / زبان تبدیل کریں (Urdu / English / العربية)" aria-label="Change Language">
+              <span class="globe-icon">🌐</span>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+              <button class="lang-option active" data-lang="ur">🇵🇰 اردو (Urdu)</button>
+              <button class="lang-option" data-lang="en">🇬🇧 English</button>
+              <button class="lang-option" data-lang="ar">🇸🇦 العربية (Arabic)</button>
+            </div>
+          </div>
+
+          <!-- Admission CTA with emoji icon -->
+          <a href="admission.html" class="btn btn-gold btn-sm" title="Online Admission / آن لائن داخلہ" aria-label="Admission">
+            <span>📝</span> <span class="admission-btn-icon">🎓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-star-and-crescent"></i> <span data-i18n="hero_badge">شاندار قرآنی و اسلامی تربیت گاہ برائے طالبات</span>
+          </div>
+          <h2 data-i18n="hero_title">
+            Sacred & Authentic Quranic Education at Home
+          </h2>
+          <p data-i18n="hero_desc">
+            طالبات اور خواتین کے لیے تجوید، قراءت، فہمِ قرآن اور نسوانی مسائل کی معیاری انفرادی آن لائن تعلیم مستند معلمات کی زیرِ نگرانی۔
+          </p>
+          <div class="hero-actions">
+            <a href="courses.html" class="btn btn-gold">
+              <i class="fa-solid fa-book-open"></i> <span data-i18n="hero_btn_courses">ہمارے کورسز دیکھیں</span>
+            </a>
+            <a href="admission.html" class="btn btn-outline-gold">
+              <i class="fa-regular fa-calendar-check"></i> <span data-i18n="hero_btn_trial">3 دن کا مفت ٹرائل کلاس</span>
+            </a>
+          </div>
+
+          <div class="hero-features-strip">
+            <div class="strip-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span data-i18n="strip_tutors">صرف مستند خواتین معلمات</span>
+            </div>
+            <div class="strip-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span data-i18n="strip_one_on_one">ون آن ون (1-on-1) انفرادی کلاسز</span>
+            </div>
+            <div class="strip-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span data-i18n="strip_flexible">اوقات کا لچکدار انتخاب</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Features Highlight -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="feat_badge">اکیڈمی کی خصوصیات</span>
+        <h2 data-i18n="feat_title">ہماری اکیڈمی کا انتخاب کیوں کریں؟</h2>
+        <div class="gold-divider"><span></span><i class="fa-solid fa-gem"></i><span></span></div>
+        <p data-i18n="feat_subtitle">ہماری ترجیح بچیوں کے لیے معیاری دینی تعلیم، مضبوط اخلاقی تربیت اور مکمل پردے دار ماحول فراہم کرنا ہے۔</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-person-dress"></i>
+          </div>
+          <h3 data-i18n="f1_title">100% مستند خواتین معلمات</h3>
+          <p data-i18n="f1_desc">تمام اسباق درس نظامی (عالمہ کورس) اور تجوید و قراءت کی سند یافتہ بااخلاق خواتین معلمات پڑھاتی ہیں۔</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <h3 data-i18n="f2_title">انفرادی توجہ (1-on-1 Sessions)</h3>
+          <p data-i18n="f2_desc">ہر بچی کو معلمہ کی مکمل توجہ میسر ہوتی ہے تاکہ ان کی کمزوریوں کو دور کر کے درست تلفظ اور روانی پیدا کی جا سکے۔</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h3 data-i18n="f3_title">اوقاتِ کار میں سہولت</h3>
+          <p data-i18n="f3_desc">سکول یا کالج کے شیڈول کے مطابق اپنی سہولت کا وقت منتخب کریں۔ صبح یا شام کسی بھی وقت کلاس لی جا سکتی ہے۔</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">
+            <i class="fa-solid fa-certificate"></i>
+          </div>
+          <h3 data-i18n="f4_title">تکمیل پر باقاعدہ سند</h3>
+          <p data-i18n="f4_desc">ہر کورس کی کامیابی سے تکمیل پر اکیڈمی کی جانب سے تصدیق شدہ تعلیمی سرٹیفکیٹ جاری کیا جاتا ہے۔</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Courses Preview -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="courses_badge">مقبول کورسز</span>
+        <h2 data-i18n="courses_title">طالبات کے لیے منتخب قرآنی و شرعی کورسز</h2>
+        <div class="gold-divider"><span></span><i class="fa-solid fa-book-quran"></i><span></span></div>
+        <p data-i18n="courses_subtitle">بچیوں کی فکری، اخلاقی اور روحانی رہنمائی کے لیے بنیادی سے ایڈوانس سطح تک کے جامع کورسز</p>
+      </div>
+
+      <div class="courses-grid">
+        <!-- Course 1 -->
+        <div class="course-card">
+          <div class="course-card-header">
+            <div class="course-badge-wrap">
+              <span class="course-badge" data-i18n="c1_badge">بنیادی کورس</span>
+            </div>
+            <h3 data-i18n="c1_title">قاعدہ و تجوید کورس</h3>
+            <span class="course-subtitle" data-i18n="c1_subtitle">درست مخارج اور تجویدی قواعد کے ساتھ</span>
+          </div>
+          <div class="course-card-body">
+            <p class="course-desc" data-i18n="c1_desc">
+              حروف کے درست مخارج، صفاتِ حروف اور تجوید کے بنیادی و عملی قواعد کی پریکٹس تاکہ قرآن مجید کو بغیر کسی غلطی کے خوبصورت انداز میں پڑھا جا سکے۔
+            </p>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c1_item1">نورانی و مدنی قاعدہ کی مشق</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c1_item2">مخارج کی درست پہچان و ادائیگی</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c1_item3">غنہ، اخفاء، ادغام و قلقلہ کے قواعد</span></li>
+            </ul>
+            <div class="course-meta">
+              <span><i class="fa-regular fa-clock"></i> <span data-i18n="c1_dur">دورانیہ: 3 سے 6 ماہ</span></span>
+              <span><i class="fa-solid fa-signal"></i> <span data-i18n="c1_lvl">سطح: ابتدائی</span></span>
+            </div>
+            <div class="course-actions">
+              <a href="courses.html#tajweed" class="btn btn-emerald btn-sm" data-i18n="btn_details">تفصیلات</a>
+              <a href="admission.html" class="btn btn-gold btn-sm" data-i18n="btn_enroll">داخلہ لیں</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="course-card">
+          <div class="course-card-header">
+            <div class="course-badge-wrap">
+              <span class="course-badge" data-i18n="c2_badge">خصوصی کورس</span>
+            </div>
+            <h3 data-i18n="c2_title">حسنِ قراءت و ترتیل کورس</h3>
+            <span class="course-subtitle" data-i18n="c2_subtitle">قرآن پاک کو خوش الحانی اور روانی سے پڑھنا</span>
+          </div>
+          <div class="course-card-body">
+            <p class="course-desc" data-i18n="c2_desc">
+              قرآن مجید کو ٹھہر ٹھہر کر اور خوبصورت آواز و لحن کے ساتھ تلاوت کرنے کی عملی تربیت۔ وقف اور ابتدا کے باریک اور اہم قواعد کی باقاعدہ تفہیم۔
+            </p>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c2_item1">ترتیل اور مدات کے تفصیلی احکام</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c2_item2">رموز اوقاف (وقف اور وصل) کی مشق</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c2_item3">خوش الحانی اور عربی لحن کی تربیت</span></li>
+            </ul>
+            <div class="course-meta">
+              <span><i class="fa-regular fa-clock"></i> <span data-i18n="c2_dur">دورانیہ: 4 ماہ</span></span>
+              <span><i class="fa-solid fa-signal"></i> <span data-i18n="c2_lvl">سطح: درمیانی</span></span>
+            </div>
+            <div class="course-actions">
+              <a href="courses.html#qirat" class="btn btn-emerald btn-sm" data-i18n="btn_details">تفصیلات</a>
+              <a href="admission.html" class="btn btn-gold btn-sm" data-i18n="btn_enroll">داخلہ لیں</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="course-card">
+          <div class="course-card-header">
+            <div class="course-badge-wrap">
+              <span class="course-badge" data-i18n="c3_badge">فہمِ قرآن</span>
+            </div>
+            <h3 data-i18n="c3_title">ترجمہ و تفسیر کورس</h3>
+            <span class="course-subtitle" data-i18n="c3_subtitle">کلامِ الٰہی کے مفاہیم اور روزمرہ زندگی میں رہنمائی</span>
+          </div>
+          <div class="course-card-body">
+            <p class="course-desc" data-i18n="c3_desc">
+              قرآن پاک کو سمجھ کر پڑھنے کا شاندار موقع۔ آسان اردو لفظی و با محاورہ ترجمہ، آیات کے اسبابِ نزول اور اخلاقی و ایمانی دروس پر مشتمل کورس۔
+            </p>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c3_item1">آسان فہم لفظی و بامحاورہ ترجمہ</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c3_item2">اہم سورتوں کی جامع تفسیر و اسباق</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c3_item3">قرآنی دعائیں اور عملی زندگی کے احکام</span></li>
+            </ul>
+            <div class="course-meta">
+              <span><i class="fa-regular fa-clock"></i> <span data-i18n="c3_dur">دورانیہ: 6 سے 12 ماہ</span></span>
+              <span><i class="fa-solid fa-signal"></i> <span data-i18n="c3_lvl">سطح: عام فہم</span></span>
+            </div>
+            <div class="course-actions">
+              <a href="courses.html#tafseer" class="btn btn-emerald btn-sm" data-i18n="btn_details">تفصیلات</a>
+              <a href="admission.html" class="btn btn-gold btn-sm" data-i18n="btn_enroll">داخلہ لیں</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 4 -->
+        <div class="course-card">
+          <div class="course-card-header">
+            <div class="course-badge-wrap">
+              <span class="course-badge" data-i18n="c4_badge">خواتین کے لیے خصوصی</span>
+            </div>
+            <h3 data-i18n="c4_title">فقہ و مسائلِ خواتین کورس</h3>
+            <span class="course-subtitle" data-i18n="c4_subtitle">طہارت، عبادات اور نسوانی شرعی احکام</span>
+          </div>
+          <div class="course-card-body">
+            <p class="course-desc" data-i18n="c4_desc">
+              خواتین اور بچیوں کے مخصوص شرعی احکام و مسائل۔ پاکی و ناپاکی، نماز و روزے کے مسائل اور روزمرہ شرعی رہنمائی عالمہ اساتذہ کے ساتھ مکمل پرائیویسی میں۔
+            </p>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c4_item1">طہارت و حیض و نفاس کے شرعی احکام</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c4_item2">نماز اور دیگر عبادات کا درست طریقہ</span></li>
+              <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="c4_item3">پردہ، حیا اور معاشرتی زندگی کے آداب</span></li>
+            </ul>
+            <div class="course-meta">
+              <span><i class="fa-regular fa-clock"></i> <span data-i18n="c4_dur">دورانیہ: 2 سے 3 ماہ</span></span>
+              <span><i class="fa-solid fa-signal"></i> <span data-i18n="c4_lvl">سطح: بنیادی و لازمی</span></span>
+            </div>
+            <div class="course-actions">
+              <a href="courses.html#fiqh" class="btn btn-emerald btn-sm" data-i18n="btn_details">تفصیلات</a>
+              <a href="admission.html" class="btn btn-gold btn-sm" data-i18n="btn_enroll">داخلہ لیں</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div style="text-align: center; margin-top: 45px;">
+        <a href="courses.html" class="btn btn-gold">
+          <span data-i18n="btn_view_all_courses">تمام کورسز کا مکمل نصاب و تفصیلات ملاحظہ فرمائیں</span> <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching Methodology -->
+  <section class="method-section">
+    <div class="container">
+      <div class="method-grid">
+        <div class="method-content">
+          <div class="section-badge" data-i18n="method_badge">ہمارا طریقہ تدریس</div>
+          <h2 style="font-size: 2.3rem; color: var(--primary-emerald); margin-bottom: 20px;" data-i18n="method_title">
+            آسان، پروقار اور موثر تدریسی عمل
+          </h2>
+          <p style="color: var(--text-muted); margin-bottom: 30px;" data-i18n="method_desc">
+            ہم نے آن لائن تدریس کو اس طرح مرتب کیا ہے کہ کم عمر بچیوں سے لے کر گھریلو خواتین تک ہر ایک کے لیے سیکھنا نہایت آسان اور دلکش بن جائے۔
+          </p>
+
+          <div class="method-list">
+            <div class="method-item">
+              <div class="method-num">1</div>
+              <div class="method-info">
+                <h4 data-i18n="m1_title">مفت ٹرائل کلاس کا انعقاد</h4>
+                <p data-i18n="m1_desc">باقاعدہ داخلے سے قبل 3 دن کا مفت ٹرائل دیا جاتا ہے تاکہ آپ استاد کے اندازِ تدریس سے مطمئن ہو سکیں۔</p>
+              </div>
+            </div>
+
+            <div class="method-item">
+              <div class="method-num">2</div>
+              <div class="method-info">
+                <h4 data-i18n="m2_title">طالبہ کی ذہنی استعداد کے مطابق تعلیم</h4>
+                <p data-i18n="m2_desc">کوئی جلدی یا دباؤ نہیں، بلکہ ہر طالبہ کو اس کی رفتار کے مطابق سمجھا کر آگے بڑھایا جاتا ہے۔</p>
+              </div>
+            </div>
+
+            <div class="method-item">
+              <div class="method-num">3</div>
+              <div class="method-info">
+                <h4 data-i18n="m3_title">ماہانہ کارکردگی رپورٹ (Progress Report)</h4>
+                <p data-i18n="m3_desc">والدین کو طالبہ کی حاضری اور روزانہ کی تعلیمی ترقی سے باقاعدگی کے ساتھ آگاہ رکھا جاتا ہے۔</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="method-quote-box">
+          <i class="fa-solid fa-quote-right quote-icon"></i>
+          <h3 style="font-size: 1.6rem; color: var(--gold-glow); margin-bottom: 15px;" data-i18n="quote_title">نیک اور صالح نسل کی تربیت</h3>
+          <p style="font-size: 1.15rem; line-height: 2.2; color: #f1f5f9; margin-bottom: 25px;" data-i18n="quote_text">
+            "ایک لڑکی کو قرآن سکھانا دراصل ایک پوری نسل کو سنوارنے اور اسلامی شعائر سے جوڑنے کے مترادف ہے۔ ہمارا عزم ہر گھر میں قرآن کی تلاوت کا نور پھیلانا ہے۔"
+          </p>
+          <a href="#" class="btn btn-gold open-enroll-modal" data-course="فری ٹرائل کلاس">
+            <i class="fa-solid fa-envelope-open-text"></i> <span data-i18n="btn_register_today">آج ہی رجسٹریشن کروائیں</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-box">
+        <h2 data-i18n="cta_title">کیا آپ اپنی بیٹی کے لیے باکردار دینی معلمہ تلاش کر رہے ہیں؟</h2>
+        <p data-i18n="cta_desc">
+          القرآن اکیڈمی آپ کے لیے پیش کرتی ہے مکمل اعتماد اور حفاظت کے ساتھ آن لائن کلاسز۔ بغیر کسی تاخیر کے ہمارے ساتھ رابطہ کریں اور 3 دن کی مفت آزمائشی کلاس حاصل کریں۔
+        </p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/923001234567" target="_blank" class="btn btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="cta_btn_wa">واٹس ایپ پر رابطہ کریں</span>
+          </a>
+          <a href="#" class="btn btn-gold open-enroll-modal" data-course="داخلہ فارم">
+            <i class="fa-solid fa-file-pen"></i> <span data-i18n="cta_btn_form">آن لائن فارم پر کریں</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Bio -->
+        <div class="footer-col footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="brand-icon">
+              <img src="images/logo.svg" alt="القرآن اکیڈمی لوگو" width="56" height="56">
+            </div>
+            <div class="brand-text">
+              <h2 data-i18n="brand_title">القرآن اکیڈمی</h2>
+            </div>
+          </a>
+          <p class="footer-desc" data-i18n="footer_about">
+            بچیوں اور بہنوں کے لیے ایک محفوظ، قابل اعتماد اور بین الاقوامی آن لائن ادارہ جہاں مستند خواتین معلمات کے زیر نگرانی قرآن مجید کی تعلیم و تربیت دی جاتی ہے۔
+          </p>
+          <div class="footer-trust-pills">
+            <span class="trust-pill"><i class="fa-solid fa-shield-halved"></i> 100% Female Faculty</span>
+            <span class="trust-pill"><i class="fa-solid fa-user-check"></i> 1-on-1 Sessions</span>
+            <span class="trust-pill"><i class="fa-solid fa-award"></i> Certified Academy</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Core Courses -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_courses_title">اہم کورسز</h4>
+          <ul class="footer-links">
+            <li><a href="courses.html#tajweed"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c1_title">تجوید و قاعدہ کورس</span></a></li>
+            <li><a href="courses.html#qirat"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c2_title">حسنِ قراءت و ترتیل</span></a></li>
+            <li><a href="courses.html#tafseer"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c3_title">ترجمہ و تفسیر قرآن</span></a></li>
+            <li><a href="courses.html#fiqh"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c4_title">نسوانی مسائل و فقہ کورس</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Navigation -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_quick_links">فوری لنکس</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_home">ہوم پیج</span></a></li>
+            <li><a href="courses.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_courses">تمام کورسز</span></a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_about">ہمارے بارے میں</span></a></li>
+            <li><a href="admission.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_admission">آن لائن داخلہ</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_contact">رابطہ</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Hours -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact_title">رابطہ و معلومات</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+              <a href="https://wa.me/923001234567" target="_blank" dir="ltr">+92 300 1234567</a>
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:info@alquranacademy.com">info@alquranacademy.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span data-i18n="footer_timing">کلاس اوقات: صبح 8 سے رات 11 بجے (لچکدار)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar: Terms, Privacy & Copyright -->
+      <div class="footer-bottom">
+        <p data-i18n="footer_copyright">© 2026 القرآن اکیڈمی برائے طالبات۔ جملہ حقوق بحق اکیڈمی محفوظ ہیں۔</p>
+        <span class="footer-tagline-text" data-i18n="footer_tagline">نورانی تعلیم • باوقار ماحول • مستند اساتذہ</span>
+        <div class="footer-bottom-links">
+          <a href="contact.html#faq" data-i18n="faq_title">FAQ</a>
+          <a href="contact.html" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="contact.html" data-i18n="footer_terms">Terms of Service</a>
+          <a href="admin.html" style="opacity: 0.7;" title="Admin Portal"><i class="fa-solid fa-lock"></i> ایڈمن</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating WhatsApp Icon -->
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" title="واٹس ایپ پر رابطہ کریں" aria-label="WhatsApp Contact">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Admission & Trial Modal Form -->
+  <div class="modal-overlay" id="enrollModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-graduate"></i> <span data-i18n="modal_title">آن لائن داخلہ و فری ٹرائل فارم</span></h3>
+        <button class="close-modal" aria-label="بند کریں">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="enrollmentForm">
+          <div class="form-group">
+            <label for="studentName" data-i18n="form_name_lbl">طالبہ کا نام:</label>
+            <input type="text" id="studentName" class="form-control" data-i18n-ph="form_name_ph" placeholder="طالبہ کا پورا نام درج کریں" required>
+          </div>
+          <div class="form-group">
+            <label for="studentAge" data-i18n="form_age_lbl">عمر:</label>
+            <input type="number" id="studentAge" class="form-control" data-i18n-ph="form_age_ph" placeholder="عمر (سالوں میں)" required>
+          </div>
+          <div class="form-group">
+            <label for="selectedCourse" data-i18n="form_course_lbl">مطلوبہ کورس:</label>
+            <select id="selectedCourse" class="form-control" required>
+              <option value="تجوید کورس">تجوید و قاعدہ کورس</option>
+              <option value="قراءت و ترتیل کورس">حسنِ قراءت و ترتیل کورس</option>
+              <option value="ترجمہ و تفسیر کورس">ترجمہ و تفسیر قرآن کورس</option>
+              <option value="عورتوں کے مسائل کورس">فقہ و مسائلِ خواتین کورس</option>
+              <option value="3 دن کا مفت ٹرائل">3 دن کا مفت آزمائشی کلاس</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label for="studentPhone" data-i18n="form_phone_lbl">واٹس ایپ / فون نمبر:</label>
+              <input type="tel" id="studentPhone" class="form-control" data-i18n-ph="form_phone_ph" placeholder="0300-1234567" required>
+            </div>
+            <div class="form-group">
+              <label for="studentEmail">ای میل ایڈریس:</label>
+              <input type="email" id="studentEmail" class="form-control" placeholder="student@example.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="studentNote" data-i18n="form_msg_lbl">مناسب وقت یا کوئی خاص پیغام (اختیاری):</label>
+            <textarea id="studentNote" class="form-control" rows="3" data-i18n-ph="form_msg_ph" placeholder="کلاس کا ترجیحی وقت مثلاً شام 5 بجے وغیرہ"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width: 100%;">
+            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="modal_submit">درخواست جمع کروائیں</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN & Backend Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+
+  <!-- Translation Scripts -->
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

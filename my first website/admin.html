@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ایڈمن ڈیش بورڈ | القرآن اکیڈمی برائے طالبات</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-dark: #06231a;
+      --primary-emerald: #064e3b;
+      --primary-medium: #047857;
+      --primary-light: #10b981;
+      --gold-primary: #d4af37;
+      --gold-dark: #b8931a;
+      --gold-light: #fef3c7;
+      
+      --sidebar-width: 280px;
+      --bg-dashboard: #f1f5f9;
+      --card-bg: #ffffff;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      
+      --border-color: #e2e8f0;
+      --border-focus: #047857;
+      
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', 'Noto Nastaliq Urdu', 'Amiri', Tahoma, sans-serif;
+      background-color: var(--bg-dashboard);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* Passcode Lock Modal */
+    .lock-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 35, 26, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      padding: 20px;
+    }
+    .lock-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      border-top: 5px solid var(--gold-primary);
+    }
+    .lock-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(6, 78, 59, 0.08);
+      color: var(--primary-emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 20px auto;
+      border: 2px solid var(--gold-primary);
+    }
+
+    /* Layout: Sidebar + Main */
+    .dashboard-layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .dashboard-sidebar {
+      width: var(--sidebar-width);
+      background: linear-gradient(180deg, #06231a 0%, #03140f 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+      border-inline-start: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-header {
+      padding: 25px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.15);
+    }
+    .sidebar-header img {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: 3px;
+    }
+    .sidebar-title h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .sidebar-title span {
+      font-size: 0.75rem;
+      color: var(--gold-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 20px 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-category {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.4);
+      margin: 15px 12px 6px 12px;
+      font-weight: 600;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .nav-item .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-item i {
+      font-size: 1.1rem;
+      width: 22px;
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s ease;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+    }
+    .nav-item:hover i {
+      color: var(--gold-primary);
+    }
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.2) 0%, rgba(6, 78, 59, 0.4) 100%);
+      color: #ffffff;
+      border-color: rgba(212, 175, 55, 0.4);
+      font-weight: 600;
+    }
+    .nav-item.active i {
+      color: var(--gold-primary);
+    }
+    .nav-badge {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .badge-amber {
+      background: #d97706;
+      color: #ffffff;
+    }
+    .badge-green {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .badge-blue {
+      background: #0284c7;
+      color: #ffffff;
+    }
+    .badge-gray {
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+    }
+
+    .sidebar-footer {
+      padding: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .admin-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .admin-meta h5 {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .admin-meta span {
+      font-size: 0.72rem;
+      color: #10b981;
+    }
+    .logout-btn {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logout-btn:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* MAIN CONTENT */
+    .dashboard-main {
+      flex: 1;
+      margin-right: var(--sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-dashboard);
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: #ffffff;
+      padding: 16px 30px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .page-heading h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .page-heading p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      font-family: inherit;
+    }
+    .btn-emerald {
+      background: var(--primary-emerald);
+      color: #ffffff;
+    }
+    .btn-emerald:hover {
+      background: var(--primary-dark);
+    }
+    .btn-gold {
+      background: var(--gold-primary);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    .btn-gold:hover {
+      background: var(--gold-dark);
+      color: #ffffff;
+    }
+    .btn-outline {
+      background: #ffffff;
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary-emerald);
+      color: var(--primary-emerald);
+    }
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      border-radius: 6px;
+    }
+
+    /* DASHBOARD BODY CONTAINER */
+    .dashboard-content {
+      padding: 30px;
+      flex: 1;
+    }
+
+    /* MODULE CONTAINERS */
+    .dashboard-module {
+      display: none;
+    }
+    .dashboard-module.active-module {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* METRICS / STAT CARDS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+    .metric-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .metric-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary-emerald);
+    }
+    .metric-card.amber::before { background: #f59e0b; }
+    .metric-card.emerald::before { background: #10b981; }
+    .metric-card.blue::before { background: #0284c7; }
+    .metric-card.gold::before { background: var(--gold-primary); }
+
+    .metric-info h6 {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .metric-info .metric-num {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-info .metric-sub {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+    .metric-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .metric-card.emerald .metric-icon {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+    }
+    .metric-card.amber .metric-icon {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+    }
+    .metric-card.blue .metric-icon {
+      background: rgba(2, 132, 199, 0.12);
+      color: #0284c7;
+    }
+    .metric-card.gold .metric-icon {
+      background: rgba(212, 175, 55, 0.14);
+      color: #b8931a;
+    }
+
+    /* COURSE BREAKDOWN SECTION */
+    .section-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .section-card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      background: #fafbfc;
+    }
+    .section-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-card-title h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .section-card-title span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Course Cards Grid */
+    .course-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      padding: 24px;
+    }
+    .course-stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .course-stat-box:hover {
+      border-color: var(--gold-primary);
+      box-shadow: var(--shadow-sm);
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+    .course-stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .course-stat-top h5 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--primary-emerald);
+    }
+    .course-count-pill {
+      background: rgba(6, 78, 59, 0.1);
+      color: var(--primary-emerald);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .course-progress-bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .course-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-primary), var(--primary-emerald));
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+    .course-stat-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* DATA TABLE STYLING */
+    .table-responsive {
+      overflow-x: auto;
+      width: 100%;
+    }
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+    table.custom-table th {
+      background: #f8fafc;
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #334155;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+    }
+    table.custom-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.92rem;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+    table.custom-table tr:hover td {
+      background-color: #f8fafc;
+    }
+
+    /* STATUS PILLS */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .status-pending {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .status-confirmed {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .status-rejected {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    /* ACTION BUTTONS */
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .act-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .act-confirm {
+      background: #059669;
+      color: #fff;
+    }
+    .act-confirm:hover {
+      background: #047857;
+    }
+    .act-wa {
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+    }
+    .act-wa:hover {
+      background: #1eb757;
+    }
+    .act-view {
+      background: #e2e8f0;
+      color: #334155;
+    }
+    .act-view:hover {
+      background: #cbd5e1;
+    }
+    .act-del {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .act-del:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+
+    /* SEARCH & FILTER BAR */
+    .filter-bar {
+      padding: 16px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .search-box-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 360px;
+    }
+    .search-box-wrap input {
+      width: 100%;
+      padding: 9px 14px 9px 36px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #f8fafc;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .search-box-wrap input:focus {
+      border-color: var(--primary-medium);
+      background: #fff;
+    }
+    .search-box-wrap i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+    .filter-select {
+      padding: 9px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.88rem;
+      background: #ffffff;
+      outline: none;
+      color: var(--text-main);
+    }
+
+    /* CONFIRMATION / EMAIL MODAL */
+    .custom-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 35, 26, 0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+    }
+    .custom-modal-overlay.active {
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+    .custom-modal-box {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 550px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .custom-modal-header {
+      background: var(--primary-dark);
+      color: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--gold-primary);
+    }
+    .custom-modal-header h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .modal-close-btn:hover { opacity: 1; }
+    .custom-modal-body {
+      padding: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .dashboard-sidebar {
+        transform: translateX(100%);
+      }
+      .dashboard-sidebar.mobile-open {
+        transform: translateX(0);
+      }
+      .dashboard-main {
+        margin-right: 0;
+      }
+      .mobile-menu-toggle {
+        display: inline-flex !important;
+      }
+    }
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="font-urdu">
+
+  <!-- 1. Passcode Protection Overlay -->
+  <div class="lock-overlay" id="adminLock">
+    <div class="lock-card">
+      <div class="lock-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3 style="color: var(--primary-dark); font-size: 1.4rem; margin-bottom: 6px;">ایڈمنسٹریٹر لاگ ان</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 25px;">القرآن اکیڈمی برائے طالبات کے ایڈمن ڈیش بورڈ میں داخل ہونے کے لیے پاس کوڈ درج فرمائیں:</p>
+      
+      <form id="lockForm">
+        <div style="margin-bottom: 20px;">
+          <input type="password" id="passcodeInput" placeholder="پاس کوڈ درج کریں (alquran2026)" required 
+            style="width: 100%; padding: 14px; text-align: center; font-size: 1.15rem; letter-spacing: 2px; border: 2px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
+        </div>
+        <button type="submit" class="btn btn-gold" style="width: 100%; padding: 14px; justify-content: center;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> ڈیش بورڈ کھولیں
+        </button>
+      </form>
+      <div style="margin-top: 15px; font-size: 0.82rem; color: #94a3b8;">
+        پہلے سے طے شدہ پاس کوڈ: <strong>alquran2026</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-layout">
+
+    <!-- 2. SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <!-- Brand -->
+      <div class="sidebar-header">
+        <img src="images/logo.svg" alt="اکیڈمی لوگو">
+        <div class="sidebar-title">
+          <h2>القرآن اکیڈمی</h2>
+          <span><span class="live-dot"></span> ایڈمنسٹریٹر پینل</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="sidebar-nav">
+        <div class="nav-category">مرکزی کنٹرول</div>
+        
+        <div class="nav-item active" onclick="showModule('dashboard')">
+          <div class="nav-left">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>ڈیش بورڈ جائزہ</span>
+          </div>
+        </div>
+
+        <div class="nav-category">طالبات و درخواستیں</div>
+
+        <div class="nav-item" onclick="showModule('all-admissions')">
+          <div class="nav-left">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>داخلہ درخواستیں</span>
+          </div>
+          <span class="nav-badge badge-blue" id="sideTotalCount">0</span>
+        </div>
+
+        <div class="nav-item" onclick="showModule('pending-admissions')">
+          <div class="nav-left">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>زیرِ التواء (Pending)</span>
+          </div>
+          <span class="nav-badge badge-amber" id="sidePendingCount">0</span>
+        </div>
+
+        <div class="nav-item" onclick="showModule('confirmed-students')">
+          <div class="nav-left">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>منظور شدہ طالبات</span>
+          </div>
+          <span class="nav-badge badge-green" id="sideConfirmedCount">0</span>
+        </div>
+
+        <div class="nav-item" onclick="showModule('courses-analytics')">
+          <div class="nav-left">
+            <i class="fa-solid fa-book-quran"></i>
+            <span>کورسز و کلاسز</span>
+          </div>
+          <span class="nav-badge badge-gray">6 کورسز</span>
+        </div>
+
+        <div class="nav-category">مواصلات و رابطے</div>
+
+        <div class="nav-item" onclick="showModule('contact-messages')">
+          <div class="nav-left">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <span>رابطہ پیغامات</span>
+          </div>
+          <span class="nav-badge badge-blue" id="sideMessagesCount">0</span>
+        </div>
+
+        <div class="nav-item" onclick="showModule('email-settings')">
+          <div class="nav-left">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>ای میل و الرٹ سیٹنگز</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Footer Admin Profile -->
+      <div class="sidebar-footer">
+        <div class="admin-profile">
+          <div class="admin-avatar">A</div>
+          <div class="admin-meta">
+            <h5>سپر ایڈمن</h5>
+            <span>آن لائن</span>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logoutAdmin()" title="لاگ آؤٹ"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+
+    <!-- 3. MAIN DASHBOARD CONTENT -->
+    <main class="dashboard-main">
+      
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-right">
+          <button class="mobile-menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+          <div class="page-heading">
+            <h1 id="moduleHeaderTitle"><i class="fa-solid fa-gauge-high" style="color: var(--primary-emerald);"></i> ڈیش بورڈ جائزہ</h1>
+            <p id="moduleHeaderSubtitle">القرآن اکیڈمی برائے طالبات کے تمام ریکارڈز اور لائیو اعداد و شمار</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-outline btn-sm" onclick="fetchAllData(true)" title="ریفریش کریں">
+            <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i> ریفریش
+          </button>
+          <button class="btn btn-emerald btn-sm" onclick="exportAdmissionsCSV()">
+            <i class="fa-solid fa-file-excel"></i> ایکسل ڈاؤنلوڈ
+          </button>
+          <a href="index.html" target="_blank" class="btn btn-gold btn-sm">
+            <i class="fa-solid fa-globe"></i> ویب سائٹ
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Body -->
+      <div class="dashboard-content">
+
+        <!-- ================= MODULE 1: MAIN DASHBOARD OVERVIEW ================= -->
+        <section id="module-dashboard" class="dashboard-module active-module">
+          
+          <!-- 4 Top KPI Stat Cards -->
+          <div class="metrics-grid">
+            <div class="metric-card emerald">
+              <div class="metric-info">
+                <h6>کل موصولہ درخواستیں</h6>
+                <div class="metric-num" id="kpiTotal">0</div>
+                <div class="metric-sub">تمام کورسز کی کل طالبات</div>
+              </div>
+              <div class="metric-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            </div>
+
+            <div class="metric-card amber">
+              <div class="metric-info">
+                <h6>زیرِ التواء (Pending)</h6>
+                <div class="metric-num" id="kpiPending">0</div>
+                <div class="metric-sub">تصدیق کی منتظر درخواستیں</div>
+              </div>
+              <div class="metric-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            </div>
+
+            <div class="metric-card gold">
+              <div class="metric-info">
+                <h6>منظور شدہ (Confirmed)</h6>
+                <div class="metric-num" id="kpiConfirmed">0</div>
+                <div class="metric-sub">فعال و رجسٹرڈ طالبات</div>
+              </div>
+              <div class="metric-icon"><i class="fa-solid fa-user-check"></i></div>
+            </div>
+
+            <div class="metric-card blue">
+              <div class="metric-info">
+                <h6>رابطہ پیغامات</h6>
+                <div class="metric-num" id="kpiMessages">0</div>
+                <div class="metric-sub">رابطہ فارم سے موصولہ سوالات</div>
+              </div>
+              <div class="metric-icon"><i class="fa-solid fa-envelope"></i></div>
+            </div>
+          </div>
+
+          <!-- Course Analytics Overview Card -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-chart-pie" style="color: var(--gold-primary); font-size: 1.3rem;"></i>
+                <div>
+                  <h3>کورسز کے مطابق طالبات کی تعداد (Course Breakdown)</h3>
+                  <span>کون سے کورس میں کتنی بچیوں نے درخواست جمع کروائی ہے:</span>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="showModule('courses-analytics')">مکمل تفصیلات دیکھیں &larr;</button>
+            </div>
+            
+            <div class="course-stats-grid" id="courseCardsGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Recent Applications Activity Table -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-clock" style="color: var(--primary-emerald); font-size: 1.3rem;"></i>
+                <div>
+                  <h3>حالیہ داخلہ درخواستیں (Recent Submissions)</h3>
+                  <span>تازہ ترین موصول ہونے والے فارمز اور فوری کنفرمیشن:</span>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="showModule('all-admissions')">تمام درخواستیں دیکھیں &larr;</button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>طالبہ کا نام</th>
+                    <th>مطلوبہ کورس</th>
+                    <th>عمر و شہر</th>
+                    <th>واٹس ایپ نمبر</th>
+                    <th>ای میل</th>
+                    <th>سٹیٹس</th>
+                    <th>کارروائی</th>
+                  </tr>
+                </thead>
+                <tbody id="recentAdmissionsTableBody">
+                  <tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">ڈیٹا لوڈ ہو رہا ہے...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ================= MODULE 2: ALL ADMISSIONS ================= -->
+        <section id="module-all-admissions" class="dashboard-module">
+          <div class="section-card">
+            <div class="filter-bar">
+              <div class="search-box-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchAllAdmissions" placeholder="طالبہ کا نام، فون یا کورس تلاش کریں..." oninput="applyAdmissionsFilter()">
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <select class="filter-select" id="filterStatus" onchange="applyAdmissionsFilter()">
+                  <option value="all">تمام سٹیٹس (All Statuses)</option>
+                  <option value="pending">زیرِ التواء (Pending)</option>
+                  <option value="confirmed">منظور شدہ (Confirmed)</option>
+                  <option value="rejected">مسترد (Rejected)</option>
+                </select>
+
+                <select class="filter-select" id="filterCourse" onchange="applyAdmissionsFilter()">
+                  <option value="all">تمام کورسز (All Courses)</option>
+                  <option value="تجوید کورس">تجوید و قاعدہ</option>
+                  <option value="قراءت و ترتیل کورس">قراءت و ترتیل</option>
+                  <option value="ترجمہ و تفسیر کورس">ترجمہ و تفسیر</option>
+                  <option value="عورتوں کے مسائل کورس">مسائلِ خواتین</option>
+                  <option value="حفظ قرآن مجید">حفظ قرآن</option>
+                  <option value="3 دن کا مفت ٹرائل">فری ٹرائل</option>
+                </select>
+
+                <button class="btn btn-emerald btn-sm" onclick="exportAdmissionsCSV()">
+                  <i class="fa-solid fa-download"></i> ایکسل ایکسپورٹ
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>تاریخ و وقت</th>
+                    <th>طالبہ کا نام</th>
+                    <th>مطلوبہ کورس</th>
+                    <th>فون / واٹس ایپ</th>
+                    <th>ای میل</th>
+                    <th>عمر / شہر</th>
+                    <th>سٹیٹس</th>
+                    <th>کارروائی</th>
+                  </tr>
+                </thead>
+                <tbody id="allAdmissionsTableBody">
+                  <tr><td colspan="9" style="text-align: center; padding: 40px; color: #94a3b8;">درخواستیں لوڈ کی جا رہی ہیں...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= MODULE 3: PENDING ADMISSIONS ================= -->
+        <section id="module-pending-admissions" class="dashboard-module">
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-clock-rotate-left" style="color: #d97706; font-size: 1.3rem;"></i>
+                <div>
+                  <h3>زیرِ التواء داخلہ فارمز (Pending Approval)</h3>
+                  <span>یہ وہ طالبات ہیں جن کی درخواستیں موصول ہو چکی ہیں مگر ابھی کنفرم نہیں کی گئیں:</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>طالبہ کا نام</th>
+                    <th>کورس</th>
+                    <th>فون نمبر</th>
+                    <th>ای میل</th>
+                    <th>پسندیدہ وقت / پیغام</th>
+                    <th>تاریخ</th>
+                    <th>فوری کارروائی</th>
+                  </tr>
+                </thead>
+                <tbody id="pendingAdmissionsTableBody">
+                  <tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">کوئی زیرِ التواء درخواست نہیں ہے۔</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= MODULE 4: CONFIRMED STUDENTS ================= -->
+        <section id="module-confirmed-students" class="dashboard-module">
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-circle-check" style="color: #059669; font-size: 1.3rem;"></i>
+                <div>
+                  <h3>منظور شدہ و رجسٹرڈ طالبات (Active Students Roster)</h3>
+                  <span>جن طالبات کے داخلے کنفرم ہو چکے ہیں اور وہ زیرِ تعلیم ہیں:</span>
+                </div>
+              </div>
+              <button class="btn btn-emerald btn-sm" onclick="exportAdmissionsCSV('confirmed')">
+                <i class="fa-solid fa-file-excel"></i> فعال طالبات کی لسٹ ڈاؤنلوڈ کریں
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>طالبہ کا نام</th>
+                    <th>کورس</th>
+                    <th>واٹس ایپ رابطہ</th>
+                    <th>ای میل</th>
+                    <th>عمر و شہر</th>
+                    <th>تاریخِ منظوری</th>
+                    <th>کارروائی</th>
+                  </tr>
+                </thead>
+                <tbody id="confirmedAdmissionsTableBody">
+                  <tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">ابھی کوئی طالبہ منظور شدہ نہیں ہے۔</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= MODULE 5: COURSE ANALYTICS ================= -->
+        <section id="module-courses-analytics" class="dashboard-module">
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-book-quran" style="color: var(--primary-emerald); font-size: 1.3rem;"></i>
+                <div>
+                  <h3>کورسز اور کلاسز کی تفصیلی رپورٹ (Course Detailed Analytics)</h3>
+                  <span>اکیڈمی کے 6 مختلف شعبہ جات میں طالبات کی مکمل تفصیل:</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 24px;">
+              <div class="course-stats-grid" id="fullCourseStatsGrid"></div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= MODULE 6: CONTACT INQUIRIES ================= -->
+        <section id="module-contact-messages" class="dashboard-module">
+          <div class="section-card">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-envelope-open-text" style="color: var(--gold-primary); font-size: 1.3rem;"></i>
+                <div>
+                  <h3>رابطہ فارم کے تمام پیغامات (Contact Inquiries)</h3>
+                  <span>ویب سائٹ کے رابطہ پیج سے موصول ہونے والے سوالات:</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>تاریخ و وقت</th>
+                    <th>نام</th>
+                    <th>فون نمبر</th>
+                    <th>ای میل</th>
+                    <th>پیغام / استفسار</th>
+                    <th>کارروائی</th>
+                  </tr>
+                </thead>
+                <tbody id="messagesTableBody">
+                  <tr><td colspan="7" style="text-align: center; padding: 40px; color: #94a3b8;">پیغامات لوڈ ہو رہے ہیں...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= MODULE 7: EMAIL & NOTIFICATION SETTINGS ================= -->
+        <section id="module-email-settings" class="dashboard-module">
+          <div class="section-card" style="max-width: 800px; margin: 0 auto;">
+            <div class="section-card-header">
+              <div class="section-card-title">
+                <i class="fa-solid fa-paper-plane" style="color: var(--primary-emerald); font-size: 1.3rem;"></i>
+                <div>
+                  <h3>خودکار ای میل نوٹیفیکیشن سیٹنگز (Web3Forms Integration)</h3>
+                  <span>جب آپ کسی طالبہ کا داخلہ کنفرم کریں گی تو اس کے ای میل پر خودکار تصدیقی خط جائے گا</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 30px;">
+              <div style="background: rgba(6, 78, 59, 0.05); border-inline-start: 4px solid var(--primary-emerald); padding: 18px; border-radius: 8px; margin-bottom: 25px;">
+                <h5 style="color: var(--primary-emerald); margin-bottom: 6px;"><i class="fa-solid fa-circle-info"></i> ای میل کیسے کام کرتا ہے؟</h5>
+                <p style="font-size: 0.92rem; color: #475569; line-height: 1.8;">
+                  ہم دنیا کی سب سے آسان اور مفت ای میل سروس <strong>Web3Forms</strong> استعمال کر رہے ہیں۔ آپ کو صرف ایک بار اپنی مفت <strong>Access Key</strong> یہاں سیو کرنی ہے۔ جیسے ہی آپ کسی بچی کا داخلہ "منظور" کریں گی، سسٹم فوری طور پر اس کے دیے گئے ای میل ایڈریس پر مبارکباد اور کلاس ہدایات کا خوبصورت خط بھیج دے گا۔
+                </p>
+              </div>
+
+              <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">
+                  آپ کی Web3Forms Access Key:
+                </label>
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="web3FormsKeyInput" placeholder="مثلاً: 12345678-abcd-1234-abcd-1234567890ab" 
+                    style="flex: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: monospace; font-size: 1rem;">
+                  <button class="btn btn-emerald" onclick="saveWeb3FormsKey()">
+                    <i class="fa-solid fa-floppy-disk"></i> سیو کریں
+                  </button>
+                </div>
+                <small style="color: #64748b; display: block; margin-top: 6px;">
+                  اگر آپ کے پاس کی (Key) نہیں ہے تو <a href="https://web3forms.com" target="_blank" style="color: var(--primary-emerald); font-weight: 600;">web3forms.com</a> پر جا کر صرف اپنا ای میل درج کریں، آپ کو فوری مفت کی مل جائے گی۔
+                </small>
+              </div>
+
+              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                <button class="btn btn-outline" onclick="testEmailDispatch()">
+                  <i class="fa-solid fa-envelope-circle-check"></i> ٹیسٹ ای میل بھیج کر چیک کریں
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 4. APPROVAL & EMAIL NOTIFICATION MODAL -->
+  <div class="custom-modal-overlay" id="approvalModal">
+    <div class="custom-modal-box">
+      <div class="custom-modal-header">
+        <h4><i class="fa-solid fa-circle-check" style="color: var(--gold-primary);"></i> داخلہ کی منظوری و تصدیقی نوٹیفیکیشن</h4>
+        <button class="modal-close-btn" onclick="closeApprovalModal()">&times;</button>
+      </div>
+      <div class="custom-modal-body">
+        <input type="hidden" id="modalAdmissionId">
+        
+        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+          <h5 id="modalStudentName" style="color: var(--primary-emerald); font-size: 1.15rem; margin-bottom: 4px;">طالبہ کا نام</h5>
+          <p id="modalCourseName" style="font-size: 0.92rem; color: #64748b; margin-bottom: 4px;">کورس: تجوید و ترتیل</p>
+          <p id="modalContactInfo" style="font-size: 0.88rem; color: #64748b;">واٹس ایپ: 0300-1234567 | ای میل: student@example.com</p>
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem;">
+            تصدیقی خط / ای میل میسج (طالبہ کے ای میل پر جائے گا):
+          </label>
+          <textarea id="modalEmailMessage" rows="5" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 0.9rem; line-height: 1.6;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button class="btn btn-outline" onclick="closeApprovalModal()">منسوخ کریں</button>
+          <button class="btn btn-emerald" id="confirmApprovalBtn" onclick="executeAdmissionApproval()">
+            <i class="fa-solid fa-paper-plane"></i> داخلہ کنفرم کریں اور ای میل بھیجیں
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN & Backend Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+
+  <script>
+    // State Store
+    let allAdmissions = [];
+    let allMessages = [];
+    let currentSelectedAdmission = null;
+
+    // Course List
+    const ACADEMY_COURSES = [
+      { id: "تجوید کورس", title: "تجوید و قاعدہ کورس", icon: "fa-book-open" },
+      { id: "قراءت و ترتیل کورس", title: "حسنِ قراءت و ترتیل", icon: "fa-microphone-lines" },
+      { id: "ترجمہ و تفسیر کورس", title: "ترجمہ و تفسیر قرآن", icon: "fa-book-atlas" },
+      { id: "عورتوں کے مسائل کورس", title: "فقہ و مسائلِ خواتین", icon: "fa-hands-holding-child" },
+      { id: "حفظ قرآن مجید", title: "حفظ قرآن مجید", icon: "fa-award" },
+      { id: "3 دن کا مفت ٹرائل", title: "3 دن کا مفت ٹرائل", icon: "fa-chalkboard-user" }
+    ];
+
+    // Initialize Lock and Data
+    document.addEventListener('DOMContentLoaded', () => {
+      const lockOverlay = document.getElementById('adminLock');
+      const lockForm = document.getElementById('lockForm');
+      const passcodeInput = document.getElementById('passcodeInput');
+
+      if (sessionStorage.getItem('alquran_admin_auth') === 'true') {
+        lockOverlay.style.display = 'none';
+        fetchAllData();
+      }
+
+      lockForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (passcodeInput.value.trim() === 'alquran2026') {
+          sessionStorage.setItem('alquran_admin_auth', 'true');
+          lockOverlay.style.display = 'none';
+          fetchAllData();
+        } else {
+          alert('درج کردہ پاس کوڈ درست نہیں ہے! دوبارہ کوشش فرمائیں۔');
+        }
+      });
+
+      // Load saved Web3Forms Key
+      const savedKey = localStorage.getItem('alquran_web3forms_key');
+      if (savedKey) {
+        document.getElementById('web3FormsKeyInput').value = savedKey;
+      }
+    });
+
+    function logoutAdmin() {
+      if (confirm('کیا آپ ایڈمن پینل سے لاگ آؤٹ ہونا چاہتی ہیں؟')) {
+        sessionStorage.removeItem('alquran_admin_auth');
+        window.location.reload();
+      }
+    }
+
+    function toggleSidebar() {
+      document.getElementById('dashboardSidebar').classList.toggle('mobile-open');
+    }
+
+    // Switch Modules
+    function showModule(moduleName) {
+      document.querySelectorAll('.dashboard-module').forEach(m => m.classList.remove('active-module'));
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+
+      const target = document.getElementById(`module-${moduleName}`);
+      if (target) target.classList.add('active-module');
+
+      // Highlight active nav item
+      const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+      navItems.forEach(item => {
+        if (item.getAttribute('onclick')?.includes(moduleName)) {
+          item.classList.add('active');
+        }
+      });
+
+      // Update titles
+      const titles = {
+        'dashboard': ['ڈیش بورڈ جائزہ', 'القرآن اکیڈمی برائے طالبات کے تمام ریکارڈز اور لائیو اعداد و شمار', 'fa-gauge-high'],
+        'all-admissions': ['تمام داخلہ درخواستیں', 'تمام کورسز میں موصول ہونے والی طالبات کی درخواستیں', 'fa-file-signature'],
+        'pending-admissions': ['زیرِ التواء داخلہ فارمز', 'درخواستیں جن کی تصدیق یا جواب دینا باقی ہے', 'fa-clock-rotate-left'],
+        'confirmed-students': ['منظور شدہ طالبات', 'فعال اور زیرِ تعلیم طالبات کا مکمل ریکارڈ', 'fa-circle-check'],
+        'courses-analytics': ['کورسز اور کلاسز کی تفصیلی رپورٹ', 'تمام کورسز میں داخلہ لینے والی بچیوں کی تعداد', 'fa-book-quran'],
+        'contact-messages': ['رابطہ فارم کے پیغامات', 'ویب سائٹ رابطہ فارم سے موصول ہونے والے استفسارات', 'fa-envelope-open-text'],
+        'email-settings': ['ای میل و الرٹ سیٹنگز', 'طالبات کو خودکار تصدیقی خط بھیجنے کے لیے Web3Forms کنفیگریشن', 'fa-paper-plane']
+      };
+
+      if (titles[moduleName]) {
+        document.getElementById('moduleHeaderTitle').innerHTML = `<i class="fa-solid ${titles[moduleName][2]}" style="color: var(--primary-emerald);"></i> ${titles[moduleName][0]}`;
+        document.getElementById('moduleHeaderSubtitle').innerText = titles[moduleName][1];
+      }
+
+      // Close mobile sidebar if open
+      document.getElementById('dashboardSidebar').classList.remove('mobile-open');
+    }
+
+    // Fetch All Data from Supabase
+    async function fetchAllData(isManual = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
+
+      if (!window.supabaseClient) {
+        if (isManual) alert('Supabase کنکشن دستیاب نہیں ہے۔');
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+        return;
+      }
+
+      try {
+        // 1. Fetch Admissions
+        const { data: adm, error: admErr } = await window.supabaseClient
+          .from('admissions')
+          .select('*')
+          .order('id', { ascending: false });
+
+        if (!admErr) {
+          allAdmissions = (adm || []).map(row => ({
+            ...row,
+            status: row.status || 'pending'
+          }));
+          updateDashboardMetrics();
+          renderAdmissionsTables();
+          renderCourseAnalytics();
+        } else {
+          console.warn('Admissions fetch issue:', admErr);
+        }
+
+        // 2. Fetch Contact Messages
+        const { data: msg, error: msgErr } = await window.supabaseClient
+          .from('contact_messages')
+          .select('*')
+          .order('id', { ascending: false });
+
+        if (!msgErr) {
+          allMessages = msg || [];
+          renderContactMessages();
+        }
+      } catch (e) {
+        console.error("Fetch error:", e);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+        if (isManual && typeof window.showToast === 'function') {
+          window.showToast('تمام ڈیٹا کامیابی سے اپڈیٹ ہو گیا ہے!', 'info');
+        }
+      }
+    }
+
+    // Update KPIs & Badges
+    function updateDashboardMetrics() {
+      const total = allAdmissions.length;
+      const pending = allAdmissions.filter(a => a.status === 'pending').length;
+      const confirmed = allAdmissions.filter(a => a.status === 'confirmed').length;
+      const messages = allMessages.length;
+
+      document.getElementById('kpiTotal').innerText = total;
+      document.getElementById('kpiPending').innerText = pending;
+      document.getElementById('kpiConfirmed').innerText = confirmed;
+      document.getElementById('kpiMessages').innerText = messages;
+
+      document.getElementById('sideTotalCount').innerText = total;
+      document.getElementById('sidePendingCount').innerText = pending;
+      document.getElementById('sideConfirmedCount').innerText = confirmed;
+      document.getElementById('sideMessagesCount').innerText = messages;
+    }
+
+    // Render Course Cards and Progress Bars
+    function renderCourseAnalytics() {
+      const total = allAdmissions.length || 1;
+      let gridHtml = '';
+
+      ACADEMY_COURSES.forEach(c => {
+        const matching = allAdmissions.filter(a => a.course && a.course.includes(c.id));
+        const count = matching.length;
+        const percent = Math.round((count / total) * 100);
+
+        gridHtml += `
+          <div class="course-stat-box" onclick="filterBySpecificCourse('${c.id}')">
+            <div class="course-stat-top">
+              <h5><i class="fa-solid ${c.icon}" style="color: var(--gold-primary); margin-left: 6px;"></i> ${c.title}</h5>
+              <span class="course-count-pill">${count} طالبات</span>
+            </div>
+            <div class="course-progress-bar">
+              <div class="course-progress-fill" style="width: ${percent}%;"></div>
+            </div>
+            <div class="course-stat-footer">
+              <span>کل درخواستوں کا ${percent}%</span>
+              <span style="color: var(--primary-emerald); font-weight: 600;">طالبات دیکھیں &larr;</span>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('courseCardsGrid').innerHTML = gridHtml;
+      const fullGrid = document.getElementById('fullCourseStatsGrid');
+      if (fullGrid) fullGrid.innerHTML = gridHtml;
+    }
+
+    function filterBySpecificCourse(courseId) {
+      showModule('all-admissions');
+      const select = document.getElementById('filterCourse');
+      if (select) {
+        select.value = courseId;
+        applyAdmissionsFilter();
+      }
+    }
+
+    // Render Admissions Tables
+    function renderAdmissionsTables() {
+      // 1. Recent Table (Top 5)
+      const recent = allAdmissions.slice(0, 5);
+      const recentTbody = document.getElementById('recentAdmissionsTableBody');
+      if (recent.length === 0) {
+        recentTbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">ابھی تک کوئی درخواست موصول نہیں ہوئی۔</td></tr>`;
+      } else {
+        recentTbody.innerHTML = recent.map(r => generateTableRowHtml(r, false)).join('');
+      }
+
+      // 2. All Admissions
+      applyAdmissionsFilter();
+
+      // 3. Pending
+      const pendingList = allAdmissions.filter(a => a.status === 'pending');
+      const pendingTbody = document.getElementById('pendingAdmissionsTableBody');
+      if (pendingList.length === 0) {
+        pendingTbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #10b981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> کوئی بھی درخواست زیرِ التواء نہیں ہے۔ سب کلئیر ہیں!</td></tr>`;
+      } else {
+        pendingTbody.innerHTML = pendingList.map(r => `
+          <tr>
+            <td><strong>${r.student_name}</strong></td>
+            <td><span class="status-pill status-pending">${r.course || 'جنرل'}</span></td>
+            <td><a href="https://wa.me/${(r.phone || '').replace(/[^0-9]/g, '')}" target="_blank" class="act-btn act-wa"><i class="fa-brands fa-whatsapp"></i> ${r.phone}</a></td>
+            <td>${r.email || '—'}</td>
+            <td style="max-width: 200px; color: #64748b;">${r.note || '—'}</td>
+            <td style="font-size: 0.82rem; color: #94a3b8;">${formatDate(r.created_at)}</td>
+            <td>
+              <button class="act-btn act-confirm" onclick="openApprovalModal(${r.id})">
+                <i class="fa-solid fa-check"></i> منظور کریں
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 4. Confirmed Students
+      const confirmedList = allAdmissions.filter(a => a.status === 'confirmed');
+      const confirmedTbody = document.getElementById('confirmedAdmissionsTableBody');
+      if (confirmedList.length === 0) {
+        confirmedTbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">ابھی کوئی طالبہ منظور شدہ نہیں ہے۔</td></tr>`;
+      } else {
+        confirmedTbody.innerHTML = confirmedList.map(r => `
+          <tr>
+            <td><strong>${r.student_name}</strong></td>
+            <td><span class="status-pill status-confirmed">${r.course || 'جنرل'}</span></td>
+            <td><a href="https://wa.me/${(r.phone || '').replace(/[^0-9]/g, '')}" target="_blank" class="act-btn act-wa"><i class="fa-brands fa-whatsapp"></i> ${r.phone}</a></td>
+            <td>${r.email || '—'}</td>
+            <td>${r.age ? r.age + ' سال' : ''} ${r.city ? '(' + r.city + ')' : ''}</td>
+            <td style="font-size: 0.82rem; color: #059669; font-weight: 600;">منظور شدہ</td>
+            <td>
+              <button class="act-btn act-del" onclick="deleteAdmissionRecord(${r.id})" title="ڈیلیٹ"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function generateTableRowHtml(r, showIndex = true) {
+      const cleanPhone = (r.phone || '').replace(/[^0-9]/g, '');
+      const statusClass = r.status === 'confirmed' ? 'status-confirmed' : (r.status === 'rejected' ? 'status-rejected' : 'status-pending');
+      const statusLabel = r.status === 'confirmed' ? 'منظور شدہ' : (r.status === 'rejected' ? 'مسترد' : 'زیرِ التواء');
+
+      return `
+        <tr>
+          ${showIndex ? `<td><strong>${r.id}</strong></td>` : ''}
+          <td style="font-size: 0.82rem; color: #64748b; white-space: nowrap;">${formatDate(r.created_at)}</td>
+          <td>
+            <div style="font-weight: 700; color: var(--primary-dark); font-size: 0.98rem;">${r.student_name}</div>
+            ${r.city ? `<span style="font-size: 0.78rem; color: #64748b;">${r.city}</span>` : ''}
+          </td>
+          <td><span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-emerald);">${r.course || 'جنرل'}</span></td>
+          <td>
+            <a href="https://wa.me/${cleanPhone}" target="_blank" class="act-btn act-wa" style="font-family: monospace;">
+              <i class="fa-brands fa-whatsapp"></i> ${r.phone}
+            </a>
+          </td>
+          <td style="font-size: 0.88rem; color: #475569;">${r.email ? `<a href="mailto:${r.email}" style="color: var(--primary-medium);">${r.email}</a>` : '—'}</td>
+          <td>${r.age ? r.age + ' سال' : '—'}</td>
+          <td><span class="status-pill ${statusClass}">${statusLabel}</span></td>
+          <td>
+            <div class="action-btn-group">
+              ${r.status !== 'confirmed' ? `
+                <button class="act-btn act-confirm" onclick="openApprovalModal(${r.id})" title="داخلہ منظور کریں اور ای میل بھیجیں">
+                  <i class="fa-solid fa-check"></i> منظور
+                </button>
+              ` : `
+                <button class="act-btn act-view" onclick="openApprovalModal(${r.id})" title="نوٹیفیکیشن دوبارہ بھیجیں">
+                  <i class="fa-solid fa-paper-plane"></i> ای میل
+                </button>
+              `}
+              <button class="act-btn act-del" onclick="deleteAdmissionRecord(${r.id})" title="ڈیلیٹ"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }
+
+    function applyAdmissionsFilter() {
+      const q = (document.getElementById('searchAllAdmissions')?.value || '').toLowerCase();
+      const statusFilter = document.getElementById('filterStatus')?.value || 'all';
+      const courseFilter = document.getElementById('filterCourse')?.value || 'all';
+
+      const filtered = allAdmissions.filter(item => {
+        const matchesQ = !q || 
+          (item.student_name && item.student_name.toLowerCase().includes(q)) ||
+          (item.phone && item.phone.includes(q)) ||
+          (item.email && item.email.toLowerCase().includes(q)) ||
+          (item.city && item.city.toLowerCase().includes(q)) ||
+          (item.course && item.course.toLowerCase().includes(q));
+
+        const matchesStatus = statusFilter === 'all' || item.status === statusFilter;
+        const matchesCourse = courseFilter === 'all' || (item.course && item.course.includes(courseFilter));
+
+        return matchesQ && matchesStatus && matchesCourse;
+      });
+
+      const tbody = document.getElementById('allAdmissionsTableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 40px; color: #94a3b8;">کوئی ریکارڈ نہیں ملا۔</td></tr>`;
+      } else {
+        tbody.innerHTML = filtered.map(r => generateTableRowHtml(r, true)).join('');
+      }
+    }
+
+    // Render Contact Messages
+    function renderContactMessages() {
+      const tbody = document.getElementById('messagesTableBody');
+      if (allMessages.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">کوئی نیا پیغام موجود نہیں ہے۔</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = allMessages.map((m, index) => {
+        const cleanPhone = (m.phone || '').replace(/[^0-9]/g, '');
+        return `
+          <tr>
+            <td><strong>${index + 1}</strong></td>
+            <td style="font-size: 0.82rem; color: #64748b;">${formatDate(m.created_at)}</td>
+            <td><strong>${m.name}</strong></td>
+            <td>
+              <a href="https://wa.me/${cleanPhone}" target="_blank" class="act-btn act-wa" style="font-family: monospace;">
+                <i class="fa-brands fa-whatsapp"></i> ${m.phone}
+              </a>
+            </td>
+            <td>${m.email ? `<a href="mailto:${m.email}" style="color: var(--primary-medium);">${m.email}</a>` : '—'}</td>
+            <td style="max-width: 320px; color: #334155; line-height: 1.6;">${m.message}</td>
+            <td>
+              <button class="act-btn act-del" onclick="deleteContactRecord(${m.id})"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Approval & Email Confirmation Modal Functions
+    function openApprovalModal(admissionId) {
+      const item = allAdmissions.find(a => a.id === admissionId);
+      if (!item) return;
+
+      currentSelectedAdmission = item;
+      document.getElementById('modalAdmissionId').value = item.id;
+      document.getElementById('modalStudentName').innerText = `طالبہ کا نام: ${item.student_name}`;
+      document.getElementById('modalCourseName').innerText = `منتخب کورس: ${item.course || 'جنرل کورس'}`;
+      document.getElementById('modalContactInfo').innerText = `واٹس ایپ: ${item.phone} | ای میل: ${item.email || 'ای میل فراہم نہیں کیا گیا'}`;
+
+      // Pre-compose customized congratulation email
+      document.getElementById('modalEmailMessage').value = `السلام علیکم و رحمۃ اللہ و برکاتہ!
+محترم ${item.student_name}،
+مبارک ہو! "القرآن اکیڈمی برائے طالبات" میں آپ کا کورس (${item.course}) کے لیے داخلہ کامیابی سے منظور (Confirm) کر لیا گیا ہے۔
+ہماری معلمات جلد آپ سے کلاس کے اوقات اور شیڈول کے متعلق واٹس ایپ پر رابطہ فرمائیں گی۔
+جزاکم اللہ خیراً و احسن الجزاء۔
+القرآن اکیڈمی برائے طالبات`;
+
+      document.getElementById('approvalModal').classList.add('active');
+    }
+
+    function closeApprovalModal() {
+      document.getElementById('approvalModal').classList.remove('active');
+      currentSelectedAdmission = null;
+    }
+
+    async function executeAdmissionApproval() {
+      if (!currentSelectedAdmission) return;
+      const btn = document.getElementById('confirmApprovalBtn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> پروسیس ہو رہا ہے...';
+
+      const admissionId = currentSelectedAdmission.id;
+      const customMsg = document.getElementById('modalEmailMessage').value;
+
+      // 1. Update status in Supabase database
+      if (typeof window.updateAdmissionStatus === 'function') {
+        const updateRes = await window.updateAdmissionStatus(admissionId, 'confirmed');
+        if (!updateRes.success) {
+          console.warn("Could not update status in DB:", updateRes.error);
+        }
+      }
+
+      // Update local state
+      const target = allAdmissions.find(a => a.id === admissionId);
+      if (target) target.status = 'confirmed';
+
+      // 2. Send Email via Web3Forms
+      let emailSent = false;
+      if (currentSelectedAdmission.email && typeof window.sendStudentEmailNotification === 'function') {
+        const emailRes = await window.sendStudentEmailNotification({
+          student_name: currentSelectedAdmission.student_name,
+          student_email: currentSelectedAdmission.email,
+          course: currentSelectedAdmission.course,
+          status: 'confirmed',
+          message: customMsg
+        });
+
+        if (emailRes.success) {
+          emailSent = true;
+          showToast('داخلہ کنفرم ہو گیا اور طالبہ کو ای میل نوٹیفیکیشن بھیج دی گئی!', 'success');
+        } else if (emailRes.needsKey) {
+          alert('داخلہ کنفرم ہو گیا ہے۔ طالبہ کو خودکار ای میل بھیجنے کے لیے ایڈمن سیٹنگز میں اپنی مفت Web3Forms Access Key سیو فرمائیں۔');
+        } else {
+          showToast(`داخلہ کنفرم ہو گیا۔ ای میل بھیجنے میں خرابی: ${emailRes.message}`, 'info');
+        }
+      } else {
+        showToast('داخلہ کنفرم ہو گیا! (طالبہ کا ای میل ایڈریس موجود نہیں تھا)', 'success');
+      }
+
+      // 3. Offer instant WhatsApp confirmation
+      const cleanPhone = (currentSelectedAdmission.phone || '').replace(/[^0-9]/g, '');
+      if (cleanPhone) {
+        const waText = encodeURIComponent(`السلام علیکم ${currentSelectedAdmission.student_name}!\nالقرآن اکیڈمی برائے طالبات میں آپ کا کورس (${currentSelectedAdmission.course}) کا داخلہ کنفرم ہو گیا ہے۔ کلاس کی تفصیلات کے لیے یہ پیغام بھیجا جا رہا ہے۔`);
+        const confirmWa = confirm('کیا آپ ساتھ ہی واٹس ایپ پر بھی طالبہ کو مبارکباد کا میسج بھیجنا چاہتی ہیں؟');
+        if (confirmWa) {
+          window.open(`https://wa.me/${cleanPhone}?text=${waText}`, '_blank');
+        }
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      closeApprovalModal();
+      updateDashboardMetrics();
+      renderAdmissionsTables();
+    }
+
+    // Save Web3Forms Key
+    function saveWeb3FormsKey() {
+      const key = document.getElementById('web3FormsKeyInput').value.trim();
+      if (!key) return alert('براہِ کرم کی (Key) درج فرمائیں۔');
+      localStorage.setItem('alquran_web3forms_key', key);
+      showToast('Web3Forms Access Key کامیابی سے سیو ہو گئی ہے!', 'success');
+    }
+
+    async function testEmailDispatch() {
+      const key = localStorage.getItem('alquran_web3forms_key');
+      if (!key) return alert('پہلے اوپر اپنی Web3Forms Access Key درج کر کے سیو فرمائیں!');
+      
+      const email = prompt('ٹیسٹ ای میل بھیجنے کے لیے اپنا ای میل ایڈریس درج کریں:');
+      if (!email) return;
+
+      const res = await window.sendStudentEmailNotification({
+        student_name: 'ٹیسٹ طالبہ',
+        student_email: email,
+        course: 'تجوید کورس',
+        status: 'confirmed',
+        message: 'یہ القرآن اکیڈمی کے ایڈمن پورٹل کا ٹیسٹ نوٹیفیکیشن ہے۔ آپ کا ای میل سسٹم کامیابی سے کام کر رہا ہے۔'
+      });
+
+      if (res.success) {
+        alert('کامیابی! ٹیسٹ ای میل آپ کے ان باکس میں روانہ کر دی گئی ہے۔');
+      } else {
+        alert('ای میل نہیں جا سکی: ' + res.message);
+      }
+    }
+
+    // Delete Operations
+    async function deleteAdmissionRecord(id) {
+      if (!confirm('کیا آپ واقعی یہ ریکارڈ ڈیلیٹ کرنا چاہتی ہیں؟')) return;
+      if (!window.supabaseClient) return;
+
+      const { error } = await window.supabaseClient.from('admissions').delete().eq('id', id);
+      if (error) {
+        alert('ڈیلیٹ نہیں ہو سکا: ' + error.message);
+      } else {
+        allAdmissions = allAdmissions.filter(a => a.id !== id);
+        updateDashboardMetrics();
+        renderAdmissionsTables();
+        renderCourseAnalytics();
+        showToast('ریکارڈ کامیابی سے ڈیلیٹ ہو گیا۔', 'info');
+      }
+    }
+
+    async function deleteContactRecord(id) {
+      if (!confirm('کیا آپ یہ پیغام ڈیلیٹ کرنا چاہتی ہیں؟')) return;
+      if (!window.supabaseClient) return;
+
+      const { error } = await window.supabaseClient.from('contact_messages').delete().eq('id', id);
+      if (error) {
+        alert('پیغام ڈیلیٹ نہیں ہو سکا: ' + error.message);
+      } else {
+        allMessages = allMessages.filter(m => m.id !== id);
+        updateDashboardMetrics();
+        renderContactMessages();
+        showToast('پیغام ڈیلیٹ ہو گیا۔', 'info');
+      }
+    }
+
+    // Export CSV
+    function exportAdmissionsCSV(type = 'all') {
+      const list = type === 'confirmed' ? allAdmissions.filter(a => a.status === 'confirmed') : allAdmissions;
+      if (list.length === 0) return alert('ڈاؤنلوڈ کے لیے کوئی ریکارڈ موجود نہیں ہے۔');
+
+      let csv = 'ID,Date,Student Name,Age,City,Email,Course,Phone,Status,Notes\n';
+      list.forEach(r => {
+        csv += `"${r.id}","${r.created_at}","${r.student_name || ''}","${r.age || ''}","${r.city || ''}","${r.email || ''}","${r.course || ''}","${r.phone || ''}","${r.status || 'pending'}","${(r.note || '').replace(/"/g, '""')}"\n`;
+      });
+
+      const fileName = type === 'confirmed' ? 'AlQuran_Confirmed_Students.csv' : 'AlQuran_All_Admissions.csv';
+      downloadCsvFile(csv, fileName);
+    }
+
+    function downloadCsvFile(content, fileName) {
+      const blob = new Blob(["\uFEFF" + content], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+    }
+
+    function formatDate(isoStr) {
+      if (!isoStr) return '—';
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleDateString('ur-PK', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      } catch (e) {
+        return isoStr;
+      }
+    }
+  </script>
+</body>
+</html>

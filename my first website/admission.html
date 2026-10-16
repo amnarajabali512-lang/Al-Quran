@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آن لائن داخلہ | Admission | القرآن اکیڈمی برائے طالبات</title>
+  <meta name="description" content="Online Admission and Free Trial Registration for Al-Quran Academy for Girls.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+
+    .page-banner {
+      background: var(--emerald-gradient);
+      color: #fff;
+      padding: 60px 0 70px;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid var(--gold-primary);
+    }
+    .page-banner h1 {
+      font-size: 2.7rem;
+      color: var(--gold-glow);
+      margin-bottom: 12px;
+    }
+    .page-banner p {
+      font-size: 1.2rem;
+      color: #e2ece7;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .admission-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 40px;
+      margin-top: 50px;
+      align-items: start;
+    }
+    .admission-guide-card {
+      background: var(--emerald-gradient);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      border: 2px solid var(--gold-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .admission-guide-card h3 {
+      font-size: 1.8rem;
+      color: var(--gold-glow);
+      margin-bottom: 20px;
+    }
+    .guide-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .guide-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: var(--primary-dark);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .guide-info h5 {
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .guide-info p {
+      font-size: 0.98rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .form-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      border: 1px solid var(--border-gold);
+      box-shadow: var(--shadow-md);
+    }
+    .form-card h3 {
+      font-size: 1.8rem;
+      color: var(--primary-emerald);
+      margin-bottom: 8px;
+    }
+    .form-card p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+    @media (max-width: 900px) {
+      .admission-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="font-urdu">
+
+  <!-- Top Notification -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-contact">
+        <a href="https://wa.me/923001234567" target="_blank"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="top_whatsapp">واٹس ایپ: 923001234567+</span></a>
+        <a href="mailto:info@alquranacademy.com"><i class="fa-regular fa-envelope"></i> info@alquranacademy.com</a>
+      </div>
+      <div>
+        <span><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="top_support_note">تمام کلاسز خواتین معلمات (Female Tutors) کے ذریعے کروائی جاتی ہیں</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon">
+            <img src="images/logo.svg" alt="القرآن اکیڈمی لوگو" width="48" height="48">
+          </div>
+          <div class="brand-text">
+            <h1 data-i18n="brand_title">القرآن اکیڈمی</h1>
+          </div>
+        </a>
+
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html" data-i18n="nav_home">ہوم</a></li>
+            <li><a href="courses.html" data-i18n="nav_courses">کورسز</a></li>
+            <li><a href="about.html" data-i18n="nav_about">ہمارے بارے میں</a></li>
+            <li><a href="admission.html" class="active" data-i18n="nav_admission">داخلہ</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">رابطہ</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-cta">
+          <!-- Language Switcher: Click globe icon to cycle languages -->
+          <div class="lang-switcher-wrap">
+            <button class="lang-btn" id="langToggleBtn" title="Switch Language / زبان تبدیل کریں (Urdu / English / العربية)" aria-label="Change Language">
+              <span class="globe-icon">🌐</span>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+              <button class="lang-option active" data-lang="ur">🇵🇰 اردو (Urdu)</button>
+              <button class="lang-option" data-lang="en">🇬🇧 English</button>
+              <button class="lang-option" data-lang="ar">🇸🇦 العربية (Arabic)</button>
+            </div>
+          </div>
+
+          <!-- Admission CTA with emoji icon -->
+          <a href="admission.html" class="btn btn-gold btn-sm" title="Online Admission / آن لائن داخلہ" aria-label="Admission">
+            <span>📝</span> <span class="admission-btn-icon">🎓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <div class="container">
+      <h1>آن لائن داخلہ و فری ٹرائل پورٹل</h1>
+      <p>اپنی بیٹی کو قرآن کی نورانی تعلیم سے آراستہ کرنے کے لیے 3 دن کی مفت آزمائشی کلاس یا باقاعدہ داخلہ فارم پُر فرمائیں۔</p>
+    </div>
+  </section>
+
+  <!-- Admission Section -->
+  <section style="padding: 70px 0;">
+    <div class="container">
+      <div class="admission-wrapper">
+        
+        <!-- Admission Steps Left -->
+        <div class="admission-guide-card">
+          <h3>داخلہ کا آسان طریقہ کار</h3>
+          <p style="color: #e2ece7; margin-bottom: 30px; font-size: 1.05rem;">
+            القرآن اکیڈمی میں داخلہ کا طریقہ کار نہایت سادہ اور شفاف ہے:
+          </p>
+
+          <div class="guide-step">
+            <div class="guide-num">1</div>
+            <div class="guide-info">
+              <h5>آن لائن فارم پُر کریں</h5>
+              <p>طالبہ کی بنیادی معلومات اور مطلوبہ کورس منتخب کر کے فارم جمع کروائیں۔</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-num">2</div>
+            <div class="guide-info">
+              <h5>کوارڈینیٹر سے مفت رابطہ</h5>
+              <p>ہماری ایڈمیشن کوارڈینیٹر آپ سے واٹس ایپ پر رابطہ کر کے وقت طے کریں گی۔</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-num">3</div>
+            <div class="guide-info">
+              <h5>3 دن کا مفت ٹرائل حاصل کریں</h5>
+              <p>استاد کی تدریس کو مکمل طور پر پرکھنے کے لیے 3 دن بغیر فیس کے کلاس لیں۔</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-num">4</div>
+            <div class="guide-info">
+              <h5>باقاعدہ کلاسز کا آغاز</h5>
+              <p>مکمل اطمینان کے بعد آسان ماہانہ فیس شیڈول کے ساتھ باقاعدہ تعلیمی سفر شروع کریں۔</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 35px; text-align: center;">
+            <a href="https://wa.me/923001234567" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+              <i class="fa-brands fa-whatsapp"></i> واٹس ایپ پر ایڈمیشن ہیلپ لائن
+            </a>
+          </div>
+        </div>
+
+        <!-- Admission Form Right -->
+        <div class="form-card" id="admission-form">
+          <h3 data-i18n="contact_form_title">آن لائن داخلہ و رجسٹریشن</h3>
+          <p data-i18n="contact_form_desc">نیچے دیا گیا سادہ فارم پُر کریں، ہماری ٹیم چند گھنٹوں میں آپ سے رابطہ کرے گی۔</p>
+
+          <form id="enrollmentForm">
+            <div class="form-group">
+              <label for="studentName" data-i18n="form_name_lbl">طالبہ کا نام:</label>
+              <input type="text" id="studentName" class="form-control" data-i18n-ph="form_name_ph" placeholder="طالبہ کا پورا نام درج کریں" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label for="studentAge" data-i18n="form_age_lbl">عمر:</label>
+                <input type="number" id="studentAge" class="form-control" data-i18n-ph="form_age_ph" placeholder="مثلاً: 12" required>
+              </div>
+              <div class="form-group">
+                <label for="studentCity" data-i18n="form_city_lbl">شہر / ملک:</label>
+                <input type="text" id="studentCity" class="form-control" data-i18n-ph="form_city_ph" placeholder="مثلاً: لاہور / پاکستان" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="selectedCourse" data-i18n="form_course_lbl">مطلوبہ کورس منتخب کریں:</label>
+              <select id="selectedCourse" class="form-control" required>
+                <option value="تجوید کورس">نورانی قاعدہ و بنیادی تجوید کورس</option>
+                <option value="قراءت و ترتیل کورس">حسنِ قراءت و ترتیل کورس</option>
+                <option value="ترجمہ و تفسیر کورس">ترجمہ و تفسیر قرآن کورس</option>
+                <option value="عورتوں کے مسائل کورس">فقہ و مسائلِ خواتین کورس</option>
+                <option value="حفظ قرآن مجید">حفظ و ناظرہ قرآن مجید</option>
+                <option value="3 دن کا مفت ٹرائل">3 دن کا مفت ٹرائل کلاس</option>
+              </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label for="studentPhone" data-i18n="form_phone_lbl">واٹس ایپ نمبر (بشمول کنٹری کوڈ):</label>
+                <input type="tel" id="studentPhone" class="form-control" data-i18n-ph="form_phone_ph" placeholder="0300-1234567" required>
+              </div>
+              <div class="form-group">
+                <label for="studentEmail">ای میل ایڈریس (تصدیقی ای میل کے لیے):</label>
+                <input type="email" id="studentEmail" class="form-control" placeholder="student@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="studentNote" data-i18n="form_msg_lbl">کلاس کے لیے پسندیدہ وقت یا اضافی تفصیلات:</label>
+              <textarea id="studentNote" class="form-control" rows="3" data-i18n-ph="form_msg_ph" placeholder="مثلاً: شام 6 سے 7 بجے کے درمیان"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width: 100%; padding: 14px;">
+              <i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_submit_btn">درخواست جمع کروائیں (Submit Admission)</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Bio -->
+        <div class="footer-col footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="brand-icon">
+              <img src="images/logo.svg" alt="القرآن اکیڈمی لوگو" width="56" height="56">
+            </div>
+            <div class="brand-text">
+              <h2 data-i18n="brand_title">القرآن اکیڈمی</h2>
+            </div>
+          </a>
+          <p class="footer-desc" data-i18n="footer_about">
+            بچیوں اور بہنوں کے لیے ایک محفوظ، قابل اعتماد اور بین الاقوامی آن لائن ادارہ جہاں مستند خواتین معلمات کے زیر نگرانی قرآن مجید کی تعلیم و تربیت دی جاتی ہے۔
+          </p>
+          <div class="footer-trust-pills">
+            <span class="trust-pill"><i class="fa-solid fa-shield-halved"></i> 100% Female Faculty</span>
+            <span class="trust-pill"><i class="fa-solid fa-user-check"></i> 1-on-1 Sessions</span>
+            <span class="trust-pill"><i class="fa-solid fa-award"></i> Certified Academy</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Core Courses -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_courses_title">اہم کورسز</h4>
+          <ul class="footer-links">
+            <li><a href="courses.html#tajweed"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c1_title">تجوید و قاعدہ کورس</span></a></li>
+            <li><a href="courses.html#qirat"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c2_title">حسنِ قراءت و ترتیل</span></a></li>
+            <li><a href="courses.html#tafseer"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c3_title">ترجمہ و تفسیر قرآن</span></a></li>
+            <li><a href="courses.html#fiqh"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="c4_title">نسوانی مسائل و فقہ کورس</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Navigation -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_quick_links">فوری لنکس</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_home">ہوم پیج</span></a></li>
+            <li><a href="courses.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_courses">تمام کورسز</span></a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_about">ہمارے بارے میں</span></a></li>
+            <li><a href="admission.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_admission">آن لائن داخلہ</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="nav_contact">رابطہ</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Hours -->
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact_title">رابطہ و معلومات</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+              <a href="https://wa.me/923001234567" target="_blank" dir="ltr">+92 300 1234567</a>
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:info@alquranacademy.com">info@alquranacademy.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span data-i18n="footer_timing">کلاس اوقات: صبح 8 سے رات 11 بجے (لچکدار)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar: Terms, Privacy & Copyright -->
+      <div class="footer-bottom">
+        <p data-i18n="footer_copyright">© 2026 القرآن اکیڈمی برائے طالبات۔ جملہ حقوق بحق اکیڈمی محفوظ ہیں۔</p>
+        <span class="footer-tagline-text" data-i18n="footer_tagline">نورانی تعلیم • باوقار ماحول • مستند اساتذہ</span>
+        <div class="footer-bottom-links">
+          <a href="contact.html#faq" data-i18n="faq_title">FAQ</a>
+          <a href="contact.html" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="contact.html" data-i18n="footer_terms">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" aria-label="WhatsApp Contact">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Supabase CDN & Backend Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
